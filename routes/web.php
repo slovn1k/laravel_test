@@ -18,8 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-
-
     Route::resource('/home', 'UserController', ['except' => ['show']]);
     Route::post('/home/datatable', 'UserController@datatable');
 
@@ -29,4 +27,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update_user', 'RegisterUserController@update_user')->name('update_user');
 
     Route::post('/change_status/{id}', 'RegisterUserController@change_status')->name('change_status');
+
+    Route::get('/groups', 'GroupController@index');
+    Route::post('/groups/create_group', 'GroupController@create_group')->name('create_group');
+    Route::post('/groups/store_group', 'GroupController@store_group')->name('store_group');
+    Route::post('/groups/update_groups', 'GroupController@update_groups')->name('update_group');
+    Route::post('/groups/delete_group/{id}', 'GroupController@delete_group')->name('delete_group');
 });

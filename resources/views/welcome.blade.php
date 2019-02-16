@@ -85,5 +85,10 @@
         </div>
     </div>
 </div>
+@if (session('status'))
+    <div class="alert alert-success" style="float: right; margin-top: 5px;">
+        {{ session('status') }}
+    </div>
+@endif
 </body>
 </html>

@@ -31,6 +31,12 @@
 
     <link href="{{ asset('css/datatables.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{asset('css/general_style.css')}}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <!-- Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -105,6 +111,13 @@
             }
         });
 
+        $("document").ready(function () {
+            setTimeout(function () {
+                $("div.alert").remove();
+            }, 5000);
+
+        });
+
         $('#example').DataTable({
             "ajax": {
                 url: '/home/datatable',
@@ -114,9 +127,16 @@
             "processing": true,
             "serverSide": true,
             "bDestroy": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": true,
+            "bAutoWidth": true,
             columns: [
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'updated_at', name: 'updated_at'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             "order": [[0, 'asc']],
             "autoWidth": true,

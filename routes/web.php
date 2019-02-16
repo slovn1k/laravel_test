@@ -17,5 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/home/datatable', 'HomeController@datatable')->name('home');
+Route::group(['middleware' => 'auth'], function () {
+
+
+    Route::resource('/home', 'UserController', ['except' => ['show']]);
+    Route::post('/home/datatable', 'UserController@datatable');
+
+    Route::post('/edit_user/{id}', 'RegisterUserController@edit')->name('edit_user');
+
+    Route::post('/register_user', 'RegisterUserController@register_user')->name('register_user');
+    Route::post('/update_user', 'RegisterUserController@update_user')->name('update_user');
+
+    Route::post('/change_status/{id}', 'RegisterUserController@change_status')->name('change_status');
+});

@@ -29,14 +29,15 @@ class GroupController extends Controller
 
         foreach ($groups as $group) {
             $delete_group = $group->id . "_delete_group";
+            $group_id = $group->id . "_group_id";
             $name = $group->id . "_name";
             $create = $group->id . "_create";
             $edit = $group->id . "_edit";
             $block = $group->id . "_block";
             $delete = $group->id . "_delete";
 
-            if (isset($delete_group)) {
-                Group::where('id', $group->id)->delete();
+            if (isset($input['' . $delete_group])) {
+                Group::where('id', $input['' . $group_id])->delete();
             } else {
                 $group->update([
                     'name' => $input[$name],

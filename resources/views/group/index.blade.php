@@ -7,7 +7,17 @@
                 <div class="card">
                     <div class="card-header">Groups</div>
 
+                    <form action="{{route('create_group')}}" method="post"
+                          style="margin-top: 10px; margin-right: 10px;">
+                        {{csrf_field()}}
+                        <button type="submit" class="btn btn-success" id="add_user_button">
+                            {{__('Add new group')}}
+                        </button>
+                    </form>
+
                     <div class="card-body">
+
+
                         <form action="{{route('update_group')}}" method="post">
                             {{csrf_field()}}
                             @foreach($groups as $group)
@@ -39,6 +49,14 @@
                                         <label for="delete">Delete</label>
                                         <input style="margin-right: 10px;" type="checkbox" name="{{$group->id}}_delete"
                                                 {{($group->delete == 1) ? "checked" :  ""}}>
+
+                                        <label for="delete">Group Assign</label>
+                                        <input style="margin-right: 10px;" type="checkbox"
+                                               name="{{$group->id}}_group_assign" {{($group->allow_assign == 1) ? "checked" :  ""}}>
+
+                                        <label for="delete">Assign Permission</label>
+                                        <input style="margin-right: 10px;" type="checkbox"
+                                               name="{{$group->id}}_assign_permission" {{($group->allow_permission == 1) ? "checked" :  ""}}>
                                     </div>
                                 </div>
                             @endforeach

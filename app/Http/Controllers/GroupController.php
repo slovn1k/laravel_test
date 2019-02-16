@@ -18,6 +18,30 @@ class GroupController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create_group()
+    {
+        return view('group.create');
+    }
+
+    public function store_group(Request $request)
+    {
+        $new_group = new Group();
+        $new_group->insert([
+            'name' => $request->group_name,
+            'create' => (isset($request->group_create) ? 1 : 0),
+            'edit' => (isset($request->group_edit) ? 1 : 0),
+            'block' => (isset($request->group_block) ? 1 : 0),
+            'delete' => (isset($request->group_delete) ? 1 : 0),
+            'allow_assign' => (isset($request->group_assign) ? 1 : 0),
+            'allow_permission' => (isset($request->assign_permission) ? 1 : 0),
+        ]);
+
+        return redirect('groups')->with('status', 'Group created');
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -35,9 +59,12 @@ class GroupController extends Controller
             $edit = $group->id . "_edit";
             $block = $group->id . "_block";
             $delete = $group->id . "_delete";
+            $assign = $group->id . "_group_assign";
+            $permission = $group->id . "_assign_permission";
 
             if (isset($input['' . $delete_group])) {
                 Group::where('id', $input['' . $group_id])->delete();
+                $message = "Group deleted successfully";
             } else {
                 $group->update([
                     'name' => $input[$name],
@@ -45,12 +72,15 @@ class GroupController extends Controller
                     'edit' => (isset($input['' . $edit])) ? 1 : 0,
                     'block' => (isset($input['' . $block])) ? 1 : 0,
                     'delete' => (isset($input['' . $delete])) ? 1 : 0,
+                    'allow_assign' => (isset($input['' . $assign])) ? 1 : 0,
+                    'allow_permission' => (isset($input['' . $permission])) ? 1 : 0,
                 ]);
+                $message = "Groups updated successfully";
             }
         }
 
 
-        return redirect('groups')->with('status', 'Groups updated successfully');
+        return redirect('groups')->with('status', $message);
     }
 
     public function delete_group($id)

@@ -15,7 +15,7 @@ class Group extends Model
     const ALLOW_DELETE = 1;
 
     protected $fillable = [
-        'name', 'create', 'edit', 'block', 'delete',
+        'name', 'create', 'edit', 'block', 'delete', 'allow_assign', 'allow_permission',
     ];
 
     protected $dates = [

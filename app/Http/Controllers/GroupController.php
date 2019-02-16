@@ -64,7 +64,7 @@ class GroupController extends Controller
 
             if (isset($input['' . $delete_group])) {
                 Group::where('id', $input['' . $group_id])->delete();
-                $message = "Group deleted successfully";
+                $message = "Groups deleted successfully";
             } else {
                 $group->update([
                     'name' => $input[$name],

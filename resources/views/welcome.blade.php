@@ -68,7 +68,7 @@
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/home') }}">Users</a>
             @else
                 <a href="{{ route('login') }}">Login</a>
 
@@ -85,5 +85,10 @@
         </div>
     </div>
 </div>
+@if (session('status'))
+    <div class="alert alert-success" style="float: right; margin-top: 5px;">
+        {{ session('status') }}
+    </div>
+@endif
 </body>
 </html>

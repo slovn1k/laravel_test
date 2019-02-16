@@ -69,6 +69,7 @@
         <div class="top-right links">
             @auth
                 <a href="{{ url('/home') }}">Users</a>
+                <a href="{{ url('/groups') }}">Groups</a>
             @else
                 <a href="{{ route('login') }}">Login</a>
 

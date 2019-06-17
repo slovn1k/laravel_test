@@ -34,3 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/groups/update_groups', 'GroupController@update_groups')->name('update_group');
     Route::post('/groups/delete_group/{id}', 'GroupController@delete_group')->name('delete_group');
 });
+
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});

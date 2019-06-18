@@ -54,14 +54,6 @@ services:
     networks:
       - app-network
 
-  #PHPMyAdmin
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8080:80"
-    depends_on:
-      - db
-
 #Docker Networks
 networks:
   app-network:
